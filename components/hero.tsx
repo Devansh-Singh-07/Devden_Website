@@ -6,7 +6,7 @@ import type { TabKey } from "@/components/ios/ui";
 import { ForYouScreen, DoubtsScreen, LearnScreen } from "@/components/ios/screens/feed";
 import { CanvasScreen } from "@/components/ios/screens/core";
 import { Sparkline } from "@/components/ios/screens/art";
-import { ArrowRight, FlameGlyph, SparkGlyph } from "@/components/icons";
+import { ArrowRight, FlameGlyph } from "@/components/icons";
 
 export function Hero() {
   const [tab, setTab] = useState<TabKey>("feed");
@@ -65,20 +65,7 @@ export function Hero() {
 
       <div className="wrap relative">
         <div className="mx-auto max-w-[1080px] text-center">
-          <div
-            className="hero-rise-soft inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2 pr-3.5 backdrop-blur-md"
-            style={{ animationDelay: "80ms" }}
-          >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent">
-              <SparkGlyph size={11} />
-              iOS
-            </span>
-            <span className="text-[0.75rem] tracking-[-0.01em] text-white/55">
-              DevDen for iPhone — private beta
-            </span>
-          </div>
-
-          <h1 className="display mt-5 text-paper">
+          <h1 className="display text-paper">
             <span className="hero-rise block" style={{ animationDelay: "180ms" }}>
               Built for developers.
             </span>
@@ -106,17 +93,6 @@ export function Hero() {
             <a href="#features" className="btn btn-quiet">
               Discover the features
             </a>
-          </div>
-
-          <div
-            className="hero-rise-soft mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.625rem] uppercase tracking-[0.17em] text-white/28"
-            style={{ animationDelay: "740ms" }}
-          >
-            <span>Native iOS</span>
-            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent/70" />
-            <span>Built in SwiftUI</span>
-            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent/70" />
-            <span>Free while in beta</span>
           </div>
         </div>
 
@@ -157,23 +133,6 @@ export function Hero() {
             >
               <div className="relative">
                 <div
-                  className={`pointer-events-none absolute -top-10 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap transition-all duration-700 ${
-                    touched
-                      ? "-translate-y-2 opacity-0"
-                      : "opacity-100"
-                  }`}
-                  aria-hidden={touched}
-                >
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[0.5625rem] font-medium uppercase tracking-[0.19em] text-white/45 backdrop-blur-md">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-[soft-pulse_2.6s_ease-in-out_infinite] rounded-full bg-accent" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                    </span>
-                    Tap the tabs
-                  </span>
-                </div>
-
-                <div
                   className="absolute -inset-x-16 bottom-0 top-16 -z-10 opacity-80"
                   aria-hidden="true"
                   style={{
@@ -188,6 +147,23 @@ export function Hero() {
                     {screens[tab]}
                   </div>
                 </Phone>
+
+                <div
+                  className={`pointer-events-none absolute -bottom-10 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap transition-all duration-700 ${
+                    touched
+                      ? "translate-y-2 opacity-0"
+                      : "opacity-100"
+                  }`}
+                  aria-hidden={touched}
+                >
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[0.5625rem] font-medium uppercase tracking-[0.19em] text-white/45 backdrop-blur-md">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-[soft-pulse_2.6s_ease-in-out_infinite] rounded-full bg-accent" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                    </span>
+                    Tap the tabs
+                  </span>
+                </div>
               </div>
             </div>
 

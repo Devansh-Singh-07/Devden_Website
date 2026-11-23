@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date("2026-11-23");
   return [
-    {
-      url: "https://devden.app",
-      lastModified: new Date("2026-11-15"),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
+    { url: SITE.url, lastModified, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE.url}/support`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE.url}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${SITE.url}/terms`, lastModified, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${SITE.url}/guidelines`, lastModified, changeFrequency: "yearly", priority: 0.4 },
   ];
 }

@@ -1,183 +1,151 @@
-import { FeatureSection } from "./feature-shell";
-import {
-  CanvasVisual,
-  CommunitiesVisual,
-  DiscussionVisual,
-  FeedVisual,
-  InterviewVisual,
-  ProgressVisual,
-} from "./visuals";
-import { DSAVisualizer } from "@/components/dsa-visualizer";
+import { Phone, type Screen } from "@/components/phone";
 import { MaskLines, Reveal } from "@/components/reveal";
+
+type Feature = {
+  id: string;
+  kicker: string;
+  title: string[];
+  body: string;
+  points: string[];
+  screens: [Screen] | [Screen, Screen];
+};
+
+const features: Feature[] = [
+  {
+    id: "doubts",
+    kicker: "Doubts",
+    title: ["Stuck at 2 a.m.?", "Ask your campus."],
+    body: "Post the problem, your code and the link. Classmates answer with an explanation, code or a canvas walkthrough, and you mark the answer that helped.",
+    points: [
+      "My Campus and Everyone tabs",
+      "Accepted answers marked in green",
+      "Attach code or a canvas to any answer",
+    ],
+    screens: ["doubts", "doubt-detail"],
+  },
+  {
+    id: "interviews",
+    kicker: "Interview experiences",
+    title: ["Someone has been", "where you're going."],
+    body: "Seniors write up every round: the company, the role, the questions they were asked and what they would do differently. Share yours by name or anonymously.",
+    points: [
+      "Browse by company, role and year",
+      "Round-by-round questions and tips",
+      "Selected, rejected or pending, shown honestly",
+    ],
+    screens: ["experiences", "experience-detail"],
+  },
+  {
+    id: "canvas",
+    kicker: "Canvas",
+    title: ["Explain it the way", "you'd draw it on a board."],
+    body: "Arrays with pointers, hash tables, stacks, code with syntax highlighting and free drawing, all as blocks you arrange step by step. Invite friends and talk it through in a voice channel.",
+    points: [
+      "Array, table, stack, code and drawing blocks",
+      "Built-in tutorial to learn the blocks",
+      "Share a canvas in chat or attach it to an answer",
+    ],
+    screens: ["canvas"],
+  },
+  {
+    id: "feed",
+    kicker: "For You",
+    title: ["A feed that's", "only about code."],
+    body: "Top posts from your communities, ranked by upvotes from other students. Shortcuts to Doubts and Interviews sit right at the top, because that's what you open the app for.",
+    points: [
+      "Filter by image, canvas or text posts",
+      "Upvote, comment and share to chat",
+      "Communities for your college and interests",
+    ],
+    screens: ["feed"],
+  },
+  {
+    id: "learn",
+    kicker: "Learn",
+    title: ["Curated, not", "endless."],
+    body: "Short articles and hand-picked resources by topic, from DSA fundamentals to interview prep. Save what you want to come back to and see what your friends shared.",
+    points: [
+      "Top picks and topic categories",
+      "Save articles to read later",
+      "Shared by students, credited by name",
+    ],
+    screens: ["learn"],
+  },
+];
 
 export function Features() {
   return (
-    <>
-      <FeatureSection
-        id="feed"
-        index="01"
-        kicker="Developer Feed"
-        title={["Your corner of the internet,", "built around code."]}
-        body="A feed made only for developers. Share insights, code, and progress — then follow the conversations worth your attention."
-        facts={[
-          "Code snippets render beautifully",
-          "Top posts, ranked by developers",
-          "No algorithm noise",
-        ]}
-        tone="dark"
-        visual={<FeedVisual />}
-      />
+    <section id="features" className="relative">
+      <div className="wrap pb-6 pt-[clamp(5rem,9vw,8rem)] text-center">
+        <Reveal>
+          <p className="eyebrow">What&apos;s inside</p>
+        </Reveal>
+        <h2 className="h2 mx-auto mt-5 max-w-[16ch]">
+          <MaskLines lines={["Everything you need", "between lectures and offers."]} />
+        </h2>
+      </div>
 
-      <FeatureSection
-        id="communities"
-        index="02"
-        kicker="Communities"
-        title={["Find your people.", "Build something together."]}
-        body="Global, campus, and interest-based spaces. Ask a question, share a win, or start a study group with developers who get it."
-        facts={[
-          "Global, campus & private spaces",
-          "Ask questions with real context",
-          "Grow together, week by week",
-        ]}
-        tone="light"
-        flip
-        visual={<CommunitiesVisual />}
-      />
-
-      <FeatureSection
-        id="progress"
-        index="03"
-        kicker="Profiles & Progress"
-        title={["More than a profile.", "A record of your growth."]}
-        body="LeetCode, Codeforces, CodeChef, AtCoder — your ratings, streaks, and solved problems in one honest view of how far you've come."
-        facts={[
-          "Four platforms, one identity",
-          "Streaks that keep you honest",
-          "Progress you can actually share",
-        ]}
-        tone="dark"
-        visual={<ProgressVisual />}
-      />
-
-      <FeatureSection
-        id="discussions"
-        index="04"
-        kicker="Technical Discussions"
-        title={["Better questions", "lead to better engineers."]}
-        body="Ask anything. Compare approaches. Argue about complexity. A dedicated space for the conversations that make you better."
-        facts={[
-          "My Campus and Everyone",
-          "Accepted answers, clearly marked",
-          "Threads that stay on topic",
-        ]}
-        tone="light"
-        flip
-        visual={<DiscussionVisual />}
-      />
-
-      <FeatureSection
-        id="experiences"
-        index="05"
-        kicker="Interview Experiences"
-        title={["Someone has been", "where you're going."]}
-        body="Real interviews, documented by the developers who sat through them. Rounds, questions, outcomes — so the next person walks in prepared."
-        facts={[
-          "Browse by company and role",
-          "Round-by-round breakdowns",
-          "Shared by real developers",
-        ]}
-        tone="dark"
-        visual={<InterviewVisual />}
-      />
-
-      <FeatureSection
-        id="canvas"
-        index="06"
-        kicker="Collaborative Canvas"
-        title={["Think together.", "Draw it out. Figure it out."]}
-        body="A shared canvas for your ideas. Sketch algorithms, map systems, and explain your thinking in real time — with the people you're building with."
-        facts={[
-          "Real-time, multi-cursor editing",
-          "Infinite space for diagrams",
-          "From sketch to explanation",
-        ]}
-        tone="light"
-        flip
-        visual={<CanvasVisual />}
-      />
-
-      <VisualizerSection />
-    </>
+      {features.map((feature, index) => (
+        <FeatureRow key={feature.id} feature={feature} flip={index % 2 === 1} />
+      ))}
+    </section>
   );
 }
 
-function VisualizerSection() {
-  const facts = [
-    "Step, pause, and replay",
-    "Arrays, pointers, trees, graphs",
-    "Built for understanding, not memorizing",
-  ];
-
+function FeatureRow({ feature, flip }: { feature: Feature; flip: boolean }) {
+  const pair = feature.screens.length === 2;
   return (
-    <section
-      id="visualizers"
-      className="relative overflow-hidden border-t border-white/[0.07] bg-ink py-[clamp(5.5rem,9vw,9.5rem)] text-paper"
-    >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="glow-warm left-1/2 top-16 h-[720px] w-[960px] -translate-x-1/2 opacity-55" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute inset-x-0 top-[54%] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)]" />
-      </div>
-
-      <div className="wrap relative">
-        <div className="mx-auto max-w-[820px] text-center">
+    <div id={feature.id} className="relative overflow-x-clip py-[clamp(3.5rem,7vw,6.5rem)]">
+      <div className="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className={flip ? "lg:order-2" : ""}>
           <Reveal>
-            <div className="flex items-center justify-center gap-3.5">
-              <span className="mono-label text-accent">07</span>
-              <span className="h-px w-8 bg-white/25" aria-hidden="true" />
-              <span className="text-[0.625rem] uppercase tracking-[0.19em] text-white/35">
-                Interactive DSA Visualizers
-              </span>
-            </div>
+            <p className="eyebrow">{feature.kicker}</p>
           </Reveal>
-
-          <h2 className="h2 mt-7">
-            <MaskLines lines={["See how", "algorithms think."]} />
-          </h2>
-
-          <Reveal delay={120}>
-            <p className="lede mx-auto mt-7 max-w-[38rem]">
-              Watch algorithms run instead of reading them. Step through arrays,
-              pointers, and data structures until the idea finally clicks.
-            </p>
+          <h3 className="h2 mt-5">
+            <MaskLines lines={feature.title} />
+          </h3>
+          <Reveal delay={100}>
+            <p className="lede mt-6 max-w-[32rem]">{feature.body}</p>
           </Reveal>
-
-          <Reveal delay={200}>
-            <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
-              {facts.map((fact) => (
-                <li
-                  key={fact}
-                  className="flex items-center gap-2.5 text-[0.8125rem] leading-snug tracking-[-0.01em] text-white/50"
-                >
+          <Reveal delay={180}>
+            <ul className="mt-7 space-y-3">
+              {feature.points.map((point) => (
+                <li key={point} className="flex items-start gap-3 text-[1rem] text-fg-2">
                   <span
-                    className="h-[2px] w-3.5 shrink-0 rounded-full bg-accent"
+                    className="mt-[0.15em] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-accent"
                     aria-hidden="true"
-                  />
-                  {fact}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M2.5 6.2 5 8.6l4.5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  {point}
                 </li>
               ))}
             </ul>
           </Reveal>
         </div>
 
-        <Reveal
-          variant="scale"
-          delay={160}
-          className="mx-auto mt-14 w-full max-w-[1024px] lg:mt-16"
-        >
-          <DSAVisualizer />
+        <Reveal variant="scale" delay={120} className={flip ? "lg:order-1" : ""}>
+          <div className="relative mx-auto flex max-w-[500px] items-start justify-center gap-5 sm:gap-7">
+            <div aria-hidden="true" className="glow left-1/2 top-1/2 h-[120%] w-[140%] -translate-x-1/2 -translate-y-1/2 opacity-70" />
+            {pair ? (
+              <>
+                <div className="relative w-[47%]">
+                  <Phone screen={feature.screens[0]} />
+                </div>
+                <div className="relative w-[47%] pt-16">
+                  <Phone screen={feature.screens[1]!} />
+                </div>
+              </>
+            ) : (
+              <div className="relative w-[58%] max-w-[300px]">
+                <Phone screen={feature.screens[0]} />
+              </div>
+            )}
+          </div>
         </Reveal>
       </div>
-    </section>
+    </div>
   );
 }

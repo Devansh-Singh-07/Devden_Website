@@ -1,25 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "./ios.css";
+import { SITE } from "@/lib/site";
 
 const description =
-  "DevDen is a native iOS app for developers. A feed built around code, communities that feel like yours, real interview experiences, progress that's yours to keep, a collaborative canvas, and interactive DSA visualizers.";
+  "DevDen is a free iPhone app for computer-science students: ask doubts, read real interview experiences from your campus, and explain solutions on a shared canvas.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devden.app"),
-  title: "DevDen — Built for developers. By developers.",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: "DevDen — Learn to code, together.",
+    template: "%s · DevDen",
+  },
   description,
   applicationName: "DevDen",
   keywords: [
     "DevDen",
-    "developer community",
-    "iOS app for developers",
-    "coding community",
+    "DSA",
+    "coding doubts",
     "interview experiences",
-    "DSA visualizer",
-    "LeetCode",
-    "Codeforces",
-    "SwiftUI app",
+    "placement preparation",
+    "campus coding community",
+    "algorithm canvas",
+    "iOS app for students",
   ],
   authors: [{ name: "DevDen" }],
   creator: "DevDen",
@@ -28,16 +30,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "DevDen",
-    title: "DevDen — Built for developers. By developers.",
+    title: "DevDen — Learn to code, together.",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevDen — Built for developers. By developers.",
+    title: "DevDen — Learn to code, together.",
     description,
-  },
-  alternates: {
-    canonical: "/",
   },
   robots: {
     index: true,
@@ -48,16 +47,31 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#08080a",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "light dark",
 };
+
+// Runs before first paint so a saved Light or Dark choice never flashes the
+// other theme. "system" (the default) leaves data-theme unset and the CSS
+// follows the OS.
+const themeScript = `(function(){try{var t=localStorage.getItem("devden-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t;}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="font-sans">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      {/* Browser extensions (e.g. Grammarly) add attributes to <body> before
+          React loads; this stops that from being reported as a mismatch. */}
+      <body className="font-sans" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

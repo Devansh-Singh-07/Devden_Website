@@ -1,82 +1,39 @@
 import { LogoMark } from "@/components/logo";
 import { MaskLines, Reveal } from "@/components/reveal";
-import { Waitlist } from "@/components/waitlist";
-import {
-  BookGlyph,
-  PeopleGlyph,
-  ScribbleGlyph,
-  StarGlyph,
-} from "@/components/icons";
-
-const tabs = [
-  { label: "For You", Glyph: StarGlyph },
-  { label: "Discussion", Glyph: PeopleGlyph },
-  { label: "Canvas", Glyph: ScribbleGlyph },
-  { label: "Learn", Glyph: BookGlyph },
-];
+import { AppStoreBadge } from "@/components/app-store-badge";
+import { SITE, mailto } from "@/lib/site";
 
 export function Closing() {
   return (
-    <section
-      id="download"
-      className="relative overflow-hidden bg-ink pb-0 pt-[clamp(6rem,12vw,11rem)] text-paper"
-    >
+    <section id="download" className="relative overflow-hidden py-[clamp(5rem,10vw,9rem)]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[30%] h-[880px] w-[1320px] -translate-x-1/2 rounded-[50%] border border-white/[0.045]" />
-        <div className="absolute left-1/2 top-[34%] h-[680px] w-[1040px] -translate-x-1/2 rounded-[50%] border border-white/[0.035]" />
-        <div className="absolute bottom-[-460px] left-1/2 h-[820px] w-[1300px] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_top,rgba(255,90,30,0.24),transparent_62%)] blur-3xl" />
-        <div className="absolute inset-x-0 bottom-[26%] h-px bg-[linear-gradient(90deg,transparent,rgba(255,90,30,0.35),transparent)]" />
+        <div className="glow bottom-[-40%] left-1/2 h-[700px] w-[1100px] -translate-x-1/2" />
       </div>
 
-      <div className="wrap relative text-center">
-        <div className="hero-rise-soft mx-auto flex h-12 w-12 items-center justify-center">
-          <LogoMark size={46} className="text-accent" />
-        </div>
-
-        <p className="mono-label mt-8 text-[0.5625rem] text-white/28">
-          DevDen for iOS · Private beta
-        </p>
-
-        <h2 className="closing-title mx-auto mt-7 max-w-[1060px] font-semibold">
-          <MaskLines
-            lines={[
-              "The future of building",
-              <>
-                is collaborative<span className="text-accent">.</span>
-              </>,
-            ]}
-          />
-        </h2>
-
-        <Reveal delay={180}>
-          <p className="lede mx-auto mt-9 max-w-[32rem]">
-            Find your community. Share what you know. Learn what you don&apos;t. Keep
-            building.
-          </p>
-        </Reveal>
-
-        <Reveal delay={280} className="mt-11">
-          <Waitlist />
-        </Reveal>
-
-        <p className="mt-9 text-[0.5625rem] uppercase tracking-[0.19em] text-white/22">
-          Coming to the App Store · iPhone · Built in SwiftUI
-        </p>
-      </div>
-
-      <div className="wrap relative mt-24 sm:mt-28">
-        <div className="grid grid-cols-2 gap-y-8 border-t border-white/[0.08] pt-9 sm:grid-cols-4">
-          {tabs.map(({ label, Glyph }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center gap-3 text-white/25"
-            >
-              <Glyph />
-              <span className="text-[0.5625rem] uppercase tracking-[0.17em]">
-                {label}
-              </span>
-            </div>
-          ))}
+      <div className="wrap relative">
+        <div className="card relative mx-auto max-w-[920px] overflow-hidden px-6 py-16 text-center sm:px-12">
+          <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-50" />
+          <div className="relative">
+            <LogoMark size={64} className="mx-auto text-accent" />
+            <h2 className="h2 mx-auto mt-8 max-w-[14ch]">
+              <MaskLines lines={["Your campus is", "already asking."]} />
+            </h2>
+            <Reveal delay={120}>
+              <p className="lede mx-auto mt-6 max-w-[30rem]">
+                DevDen is free on iPhone. Join, answer one doubt, and see how fast you
+                learn when you explain.
+              </p>
+            </Reveal>
+            <Reveal delay={200} className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <AppStoreBadge />
+              <a href={mailto("DevDen question")} className="btn btn-glass">
+                Email the team
+              </a>
+            </Reveal>
+            <p className="mt-6 text-[0.8125rem] text-fg-3">
+              Questions or feedback: {SITE.supportEmail}
+            </p>
+          </div>
         </div>
       </div>
     </section>

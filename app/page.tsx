@@ -2,29 +2,23 @@ import { SiteNav } from "@/components/site-nav";
 import { Hero } from "@/components/hero";
 import { Philosophy } from "@/components/sections/philosophy";
 import { Features } from "@/components/sections/features";
-import { InterviewDeepDive } from "@/components/sections/interview-deep-dive";
-import { Identity } from "@/components/sections/identity";
+import { More } from "@/components/sections/more";
+import { Gallery } from "@/components/sections/gallery";
+import { Faq } from "@/components/sections/faq";
 import { Closing } from "@/components/sections/closing";
 import { Footer } from "@/components/sections/footer";
+import { SITE } from "@/lib/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "MobileApplication",
   name: "DevDen",
-  applicationCategory: "SocialNetworkingApplication",
-  operatingSystem: "iOS",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "iOS 26.2 or later",
   description:
-    "A peer-driven knowledge-sharing platform for developers: a developer feed, communities, progress profiles, technical discussions, real interview experiences, a collaborative canvas, and interactive DSA visualizers.",
-  url: "https://devden.app",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
-  },
-  audience: {
-    "@type": "Audience",
-    audienceType: "Developers",
-  },
+    "A study community for computer-science students: campus doubts, real interview experiences, and a canvas for explaining algorithms.",
+  url: SITE.url,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
 
 export default function Home() {
@@ -41,11 +35,10 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Philosophy />
-        <div id="features">
-          <Features />
-        </div>
-        <InterviewDeepDive />
-        <Identity />
+        <Features />
+        <More />
+        <Gallery />
+        <Faq />
         <Closing />
       </main>
       <Footer />
